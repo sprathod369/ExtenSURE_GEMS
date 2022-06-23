@@ -1,0 +1,13 @@
+---
+- name: Build GEMS DevOps Environment
+  shell:
+    cmd: cd /tmp/ExtenSURE_GEMS/docker && docker-compose build
+
+- name: Deploy GEMS DevOps Environment
+  shell:
+    cmd: cd /tmp/ExtenSURE_GEMS/docker && docker-compose up -d
+
+#- name: Cleanup files
+#  file:
+#    path: /tmp/ExtenSURE_GEMS
+#    state: absent
