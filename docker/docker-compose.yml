@@ -12,8 +12,6 @@ volumes:
         driver: local
     sonarqube_extension:
         driver: local
-    nexus_data:
-        driver: local
 
 services:
     gems_jenkins:
@@ -21,8 +19,8 @@ services:
         container_name: gems_jenkins
         restart: always
         ports:
-            - "${GEMS_JENKINS_PORT}:8080"
-            - "${GEMS_JENKINS_SLAVE_PORT}:5000"
+            - "${GEMS_JENKINS_PORT}:8090"
+            - "${GEMS_JENKINS_SLAVE_PORT}:50000"
         networks:
             - gems_cicd
         environment:
@@ -45,13 +43,3 @@ services:
             - sonarqube_logs:/opt/sonarqube/logs
             - sonarqube_data:/opt/sonarqube/data
             - sonarqube_extension:/opt/sonarqube/extensions
-    gems_nexus:
-        build: nexus/.
-        container_name: gems_nexus
-        restart: always
-        ports:
-            - "${GEMS_NEXUS_PORT}:8081"
-        networks:
-            - gems_cicd
-        volumes:
-            - nexus_data:/nexus-data
